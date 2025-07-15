@@ -27,9 +27,11 @@ class Clip {
     var createdAt: Date
     
     /// 시간별로 기록된 카메라 기울기 정보.
+    @Attribute(.externalStorage)
     var tiltList: [TimeStampedTilt]
     
     /// 시간별로 기록된 카메라 높이 정보.
+    @Attribute(.externalStorage)
     var heightList: [TimeStampedHeight]
     
     /// 새로운 Clip 인스턴스를 초기화합니다.

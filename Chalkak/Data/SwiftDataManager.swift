@@ -69,8 +69,12 @@ class SwiftDataManager {
     // MARK: - Project
     
     /// `Project` 생성
-    func createProject(guide: Guide? = nil, clips: [Clip] = []) -> Project {
-        let newProject = Project(guide: guide, clipList: clips)
+    func createProject(
+        id: String,
+        guide: Guide? = nil,
+        clips: [Clip] = []
+    ) -> Project {
+        let newProject = Project(id: id, guide: guide, clipList: clips)
         context.insert(newProject)
         return newProject
     }
@@ -88,6 +92,7 @@ class SwiftDataManager {
 
     /// `Clip` 생성
     func createClip(
+        id: String,
         videoURL: URL,
         startPoint: Double = 0,
         endPoint: Double,
@@ -95,6 +100,7 @@ class SwiftDataManager {
         heightList: [TimeStampedHeight] = []
     ) -> Clip {
         let clip = Clip(
+            id: id,
             videoURL: videoURL,
             startPoint: startPoint,
             endPoint: endPoint,
@@ -122,7 +128,7 @@ class SwiftDataManager {
     /// `Guide` 생성
     func createGuide(
         clipID: String,
-        bBoxPosition: CGPoint,
+        bBoxPosition: PointWrapper,
         bBoxScale: CGFloat,
         outlineImage: UIImage,
         cameraTilt: Tilt,
