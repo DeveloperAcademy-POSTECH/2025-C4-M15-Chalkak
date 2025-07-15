@@ -26,6 +26,7 @@ final class ClipEditViewModel: ObservableObject {
     @Published var thumbnails: [UIImage] = []
     @Published var isPlaying = false
     @Published var previewImage: UIImage?
+    @Published var clipID: String? = nil
 
     var clipURL: URL
 
@@ -163,5 +164,34 @@ final class ClipEditViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    /// `Project` 저장
+    /// 첫번째 영상 촬영 시점에 Clip 먼저 저장한 후에 해당 데이터와 nil 상태인 guide를 함께 저장
+    /// ProjectID는 UserDefault에도 저장되어 있습니다.
+    @MainActor
+    func saveProjectData() {
+        let clip = saveClipData()
+        let projectID = UUID().uuidString
+        print("saveProject")
+        _ = SwiftDataManager.shared.createProject(id: projectID, guide: nil, clips: [clip])
+        
+        SwiftDataManager.shared.saveContext()
+        UserDefaults.standard.set(projectID, forKey: "currentProjectID")
+    }
+    
+    @MainActor
+    func saveClipData() -> Clip {
+        print("saveClip")
+        let clipID = UUID().uuidString
+        self.clipID = clipID
+        return SwiftDataManager.shared.createClip(
+            id: clipID,
+            videoURL: clipURL,
+            startPoint: startPoint,
+            endPoint: endPoint,
+            tiltList: [],
+            heightList: []
+        )
     }
 }

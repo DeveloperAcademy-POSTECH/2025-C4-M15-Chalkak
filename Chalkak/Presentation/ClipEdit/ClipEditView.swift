@@ -68,6 +68,7 @@ struct ClipEditView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("다음") {
                         if isFirstShoot {
+                            editViewModel.saveProjectData()
                             overlayViewModel.prepareOverlay(
                                 from: editViewModel.clipURL,
                                 at: editViewModel.startPoint
@@ -79,13 +80,12 @@ struct ClipEditView: View {
                 }
             }
             .navigationDestination(isPresented: $overlayViewModel.isOverlayReady) {
-                OverlayView(overlayViewModel: overlayViewModel)
+                if let clipID = editViewModel.clipID {
+                    OverlayView(overlayViewModel: overlayViewModel, clipID: clipID)
+                }
             }
             .navigationDestination(isPresented: $navigateToCameraView) {
                 //TODO: - 가이드 있는 카메라 뷰파인더로 연결(Berry)
-            }
-            .onAppear {
-                editViewModel.updateContext(modelContext)
             }
     }
 }
