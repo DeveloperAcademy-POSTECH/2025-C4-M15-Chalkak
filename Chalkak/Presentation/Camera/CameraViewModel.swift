@@ -12,7 +12,7 @@ import SwiftData
 import SwiftUI
 
 class CameraViewModel: ObservableObject {
-    private let model: CameraManager
+    let model: CameraManager
     let session: AVCaptureSession
 
     @Published var isTimerRunning = false

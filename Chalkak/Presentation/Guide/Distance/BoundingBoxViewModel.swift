@@ -14,7 +14,7 @@ class BoundingBoxViewModel: ObservableObject {
     @Published var isAligned: Bool = false
     
     /// 기준 설정
-    func setReference() {
+    func setReference(from guide: Guide) {
         referenceBoundingBoxes = [
             // TODO: - 실제 Guide 데이터로 변경 (Berry)
             CGRect(x: 0.351, y: 0.206, width: 0.130, height: 0.214)

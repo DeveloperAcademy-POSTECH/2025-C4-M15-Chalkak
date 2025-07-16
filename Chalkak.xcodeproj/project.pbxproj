@@ -57,6 +57,7 @@
 		993A217B2E26A07C0059B70A /* BoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993A217A2E26A0760059B70A /* BoundingBoxView.swift */; };
 		993A217D2E26A0870059B70A /* BoundingBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993A217C2E26A0810059B70A /* BoundingBoxViewModel.swift */; };
 		993A21822E26ABAC0059B70A /* Array + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993A21812E26ABA70059B70A /* Array + Ext.swift */; };
+		99C939B62E271C7400F42541 /* BoundingBoxCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C939B52E271C7400F42541 /* BoundingBoxCameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		993A217A2E26A0760059B70A /* BoundingBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxView.swift; sourceTree = "<group>"; };
 		993A217C2E26A0810059B70A /* BoundingBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxViewModel.swift; sourceTree = "<group>"; };
 		993A21812E26ABA70059B70A /* Array + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Ext.swift"; sourceTree = "<group>"; };
+		99C939B52E271C7400F42541 /* BoundingBoxCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxCameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +308,7 @@
 				993A1F322E267E0C0059B70A /* CircleIconButton.swift */,
 				993A1F332E267E0C0059B70A /* TimerOptionSelectView.swift */,
 				993A1F342E267E0C0059B70A /* ZoomSlider.swift */,
+				99C939B52E271C7400F42541 /* BoundingBoxCameraView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				993A1F532E267E0C0059B70A /* ChalkakApp.swift in Sources */,
 				993A1F542E267E0C0059B70A /* CameraManager.swift in Sources */,
 				993A1F552E267E0C0059B70A /* BoundingBoxManager.swift in Sources */,
+				99C939B62E271C7400F42541 /* BoundingBoxCameraView.swift in Sources */,
 				993A1F562E267E0C0059B70A /* CameraHeightManager.swift in Sources */,
 				993A1F572E267E0C0059B70A /* HeightFeedbackView.swift in Sources */,
 				993A1F582E267E0C0059B70A /* HeightMeasurementARView.swift in Sources */,

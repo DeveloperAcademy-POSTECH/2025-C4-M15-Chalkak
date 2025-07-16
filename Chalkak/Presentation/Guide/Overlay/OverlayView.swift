@@ -51,5 +51,12 @@ struct OverlayView: View {
         .onDisappear {
             overlayViewModel.dismissOverlay()
         }
+        .navigationDestination(isPresented: $navigateToCameraView) {
+            if let guide = overlayViewModel.guide {
+                BoundingBoxView(guide: guide, isFirstShoot: false)
+            } else {
+                Text("가이드를 불러올 수 없습니다.")
+            }
+        }
     }
 }

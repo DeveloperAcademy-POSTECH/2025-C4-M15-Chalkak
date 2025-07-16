@@ -18,6 +18,8 @@ final class OverlayViewModel: ObservableObject {
 
     var outlineImage: UIImage? { overlayManager.outlineImage }
     var extractedImage: UIImage? { extractor.extractedImage }
+    
+    @Published var guide: Guide?
 
     init() {
         extractor.overlayManager = overlayManager
@@ -53,7 +55,7 @@ final class OverlayViewModel: ObservableObject {
             return nil
         }
         
-        let guide = SwiftDataManager.shared.createGuide(
+        let newGuide = SwiftDataManager.shared.createGuide(
             clipID: clipID,
             bBoxPosition: PointWrapper(bBox.origin),
             bBoxScale: bBox.width,
@@ -62,8 +64,9 @@ final class OverlayViewModel: ObservableObject {
             cameraHeight: 1.0
         )
         
+        self.guide = newGuide
         SwiftDataManager.shared.saveContext()
         
-        return guide
+        return newGuide
     }
 }

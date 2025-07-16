@@ -15,6 +15,9 @@ class CameraManager: NSObject, ObservableObject {
     var videoDeviceInput: AVCaptureDeviceInput!
     let movieOutput = AVCaptureMovieFileOutput()
     let videoOutput = AVCaptureVideoDataOutput()
+    
+    var onVideoSaved: ((URL) -> Void)?
+    
     private let videoDataOutputQueue = DispatchQueue(
         label: "com.camera.videoDataOutputQueue",
         qos: .userInitiated
@@ -236,5 +239,9 @@ extension CameraManager: AVCaptureFileOutputRecordingDelegate {
             return
         }
         NotificationCenter.default.post(name: .init("VideoSaved"), object: nil, userInfo: ["url": outputFileURL])
+        
+//        DispatchQueue.main.async {
+//            self.onVideoSaved?(outputFileURL)
+//        }
     }
 }

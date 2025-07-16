@@ -85,7 +85,11 @@ struct ClipEditView: View {
                 }
             }
             .navigationDestination(isPresented: $navigateToCameraView) {
-                //TODO: - 가이드 있는 카메라 뷰파인더로 연결(Berry)
+                if let guide = overlayViewModel.guide {
+                    BoundingBoxView(guide: guide, isFirstShoot: false)
+                } else {
+                    Text("가이드를 불러올 수 없습니다.")
+                }
             }
     }
 }

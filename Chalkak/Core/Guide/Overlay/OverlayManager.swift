@@ -150,10 +150,13 @@ class OverlayManager: ObservableObject {
         if let cgOutline = context.makeImage() {
             let outlineUIImage = UIImage(cgImage: cgOutline)
             DispatchQueue.main.async {
+                print("✅ 윤곽선 이미지 생성 완료")
+
                 self.outlineImage = outlineUIImage
                 completion()
             }
         } else {
+            print("❌ 윤곽선 이미지 생성 실패 (CGContext)")
             DispatchQueue.main.async {
                 completion()
             }
