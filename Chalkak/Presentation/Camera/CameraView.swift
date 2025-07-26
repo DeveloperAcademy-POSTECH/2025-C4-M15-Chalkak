@@ -26,7 +26,9 @@ struct CameraView: View {
                 onPinchZoom: viewModel.selectZoomScale,
                 currentZoomScale: viewModel.zoomScale,
                 isUsingFrontCamera: viewModel.isUsingFrontCamera,
-                showGrid: $viewModel.isGrid
+                showGrid: $viewModel.isGrid,
+                isTimerRunning: viewModel.isTimerRunning,
+                timerCountdown: viewModel.timerCountdown
             )
             .aspectRatio(9 / 16, contentMode: .fit)
             .clipped()
@@ -45,7 +47,7 @@ struct CameraView: View {
                 Spacer()
 
                 CameraBottomControlView(viewModel: viewModel)
-            }
+            }.padding(.bottom, 16)
         }
         .onReceive(viewModel.videoSavedPublisher) { url in
             self.clipUrl = url
@@ -61,4 +63,3 @@ struct CameraView: View {
         }
     }
 }
-
