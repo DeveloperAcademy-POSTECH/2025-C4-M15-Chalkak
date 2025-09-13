@@ -58,7 +58,6 @@ final class ProjectEditViewModel: ObservableObject {
         return originalID
     }
     
-    // init
     init(projectID: String) {
         self.projectID = projectID
     }

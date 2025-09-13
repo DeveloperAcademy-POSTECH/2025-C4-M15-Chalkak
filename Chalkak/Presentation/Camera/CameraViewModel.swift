@@ -24,7 +24,7 @@ class CameraViewModel: ObservableObject {
     let videoSavedPublisher = PassthroughSubject<URL, Never>()
 
     private var hasRequiredPermissions: Bool {
-        model.permissionState == .both
+        model.cameraPermissionManager.permissionState == .both
     }
 
     // 권한 요청 시트 띄워주는 변수

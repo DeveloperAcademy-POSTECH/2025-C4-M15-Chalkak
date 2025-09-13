@@ -161,7 +161,7 @@ struct CameraView: View {
         .onChange(of: cameraManager.showOnboarding) { oldValue, newValue in
             if oldValue == true && newValue == false {
                 cameraManager.showPermissionSheet = true
-                cameraManager.requestAndCheckPermissions() // 권한 요청
+                cameraManager.requestPermissions() // 권한 요청
                 viewModel.startCamera()
             }
         }
@@ -172,7 +172,7 @@ struct CameraView: View {
         }
         .onChange(of: viewModel.needsPermissionRequest) { _, needsRequest in
             if needsRequest {
-                cameraManager.reevaluateAndPresentIfNeeded()
+                cameraManager.refreshPermissionSheet()
                 viewModel.needsPermissionRequest = false
             }
         }
