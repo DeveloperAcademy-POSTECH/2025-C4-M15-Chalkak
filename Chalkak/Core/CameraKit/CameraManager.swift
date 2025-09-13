@@ -18,7 +18,9 @@ class CameraManager: NSObject, ObservableObject {
     @Published private(set) var audioAuthorizationStatus: AVAuthorizationStatus = .notDetermined
     @Published var permissionState: PermissionState = .none
     @Published var showPermissionSheet: Bool = false
-
+    @Published var isRecording = false
+    @Published var currentZoomScale: CGFloat = 1.0
+    private var backCameraZoomScale: CGFloat = 1.0
     private var audioRecordPermission = AVAudioApplication.recordPermission.undetermined
 
     var session = AVCaptureSession()
@@ -31,6 +33,7 @@ class CameraManager: NSObject, ObservableObject {
     )
 
     private let boundingBoxManager = BoundingBoxManager()
+    private var isRequestingPermissions = false
 
     @Published var torchMode: TorchMode = .off
 
@@ -44,11 +47,6 @@ class CameraManager: NSObject, ObservableObject {
         }
     }
 
-    @Published var isRecording = false
-    @Published var currentZoomScale: CGFloat = 1.0
-
-    // 카메라 줌스케일
-    private var backCameraZoomScale: CGFloat = 1.0
     private var initialCameraPosition: AVCaptureDevice.Position {
         get {
             if let savedValue = UserDefaults.standard.string(forKey: UserDefaultKey.cameraPosition),
@@ -65,9 +63,6 @@ class CameraManager: NSObject, ObservableObject {
         }
     }
 
-    private var isRequestingPermissions = false
-    private var didBecomeActiveObserver: NSObjectProtocol?
-
     override init() {
         super.init()
 
@@ -83,9 +78,6 @@ class CameraManager: NSObject, ObservableObject {
 
     deinit {
         session.stopRunning()
-        if let token = didBecomeActiveObserver {
-            NotificationCenter.default.removeObserver(token)
-        }
     }
 
     private func currentMicPermission() -> AVAudioApplication.recordPermission {
@@ -619,7 +611,6 @@ class CameraManager: NSObject, ObservableObject {
 }
 
 extension CameraManager: AVCaptureFileOutputRecordingDelegate {
-    /// 녹화가 끝나면 촬영한 파일 URL을 NotificationCenter를 통해 알림
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         if let error = error {
             print("녹화에러 \(error)")
