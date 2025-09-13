@@ -19,7 +19,7 @@ class CameraManager: NSObject, ObservableObject {
     @Published var permissionState: PermissionState = .none
     @Published var showPermissionSheet: Bool = false
 
-    private var audioRecordPermission: AVAudioSession.RecordPermission = .undetermined
+    private var audioRecordPermission = AVAudioApplication.recordPermission.undetermined
 
     var session = AVCaptureSession()
     var videoDeviceInput: AVCaptureDeviceInput!
@@ -88,13 +88,11 @@ class CameraManager: NSObject, ObservableObject {
         }
     }
 
-    @inline(__always)
-    private func currentMicPermission() -> AVAudioSession.RecordPermission {
-        return AVAudioSession.sharedInstance().recordPermission
+    private func currentMicPermission() -> AVAudioApplication.recordPermission {
+        return AVAudioApplication.shared.recordPermission
     }
 
-    @inline(__always)
-    private func mapToAVAuthorization(_ record: AVAudioSession.RecordPermission) -> AVAuthorizationStatus {
+    private func mapToAVAuthorization(_ record: AVAudioApplication.recordPermission) -> AVAuthorizationStatus {
         switch record {
         case .granted: return .authorized
         case .denied: return .denied
