@@ -92,33 +92,9 @@ class CameraManager: NSObject, ObservableObject {
         session.stopRunning()
     }
 
-    func completeOnboarding() {
-        cameraPermissionManager.completeOnboarding()
-    }
-
-    func openSettings() {
-        cameraPermissionManager.openSettings()
-    }
-
-    func requestPermissions() {
-        cameraPermissionManager.requestPermissions()
-    }
-
-    func refreshPermissionSheet() {
-        cameraPermissionManager.refreshPermissionSheet()
-    }
-
-    var permissionState: PermissionState {
-        cameraPermissionManager.permissionState
-    }
-
-    var showOnboarding: Bool {
-        cameraPermissionManager.showOnboarding
-    }
-
-    var showPermissionSheet: Bool {
-        get { cameraPermissionManager.showPermissionSheet }
-        set { cameraPermissionManager.showPermissionSheet = newValue }
+    /// 비디오 저장 알림메소드
+    func videoSaved(url: URL) {
+        savedVideoInfo.send(url)
     }
 
     /// 카메라 세팅
@@ -247,11 +223,6 @@ class CameraManager: NSObject, ObservableObject {
         } catch {
             print("디바이스 설정 변경오류\(error)")
         }
-    }
-
-    /// 비디오 저장 알림메소드
-    func videoSaved(url: URL) {
-        savedVideoInfo.send(url)
     }
 
     /// 전-후면 카메라 전환
@@ -404,6 +375,36 @@ class CameraManager: NSObject, ObservableObject {
 
         movieOutput.stopRecording()
         isRecording = false
+    }
+
+    // Permission 관련 함수
+    func completeOnboarding() {
+        cameraPermissionManager.completeOnboarding()
+    }
+
+    func openSettings() {
+        cameraPermissionManager.openSettings()
+    }
+
+    func requestPermissions() {
+        cameraPermissionManager.requestPermissions()
+    }
+
+    func refreshPermissionSheet() {
+        cameraPermissionManager.refreshPermissionSheet()
+    }
+
+    var permissionState: PermissionState {
+        cameraPermissionManager.permissionState
+    }
+
+    var showOnboarding: Bool {
+        cameraPermissionManager.showOnboarding
+    }
+
+    var showPermissionSheet: Bool {
+        get { cameraPermissionManager.showPermissionSheet }
+        set { cameraPermissionManager.showPermissionSheet = newValue }
     }
 }
 
