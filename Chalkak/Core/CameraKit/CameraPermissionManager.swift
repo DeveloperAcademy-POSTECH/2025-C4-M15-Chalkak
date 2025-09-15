@@ -104,7 +104,7 @@ class CameraPermissionManager: ObservableObject {
         let currentPermission = currentMicPermission()
 
         if currentPermission == .undetermined {
-            AVAudioSession.sharedInstance().requestRecordPermission { [weak self] _ in
+            AVAudioApplication.requestRecordPermission { [weak self] _ in
                 self?.audioRecordPermission = self?.currentMicPermission() ?? .undetermined
                 self?.audioAuthorizationStatus = self?.mapToAVAuthorization(self?.audioRecordPermission ?? .undetermined) ?? .notDetermined
                 completion()
